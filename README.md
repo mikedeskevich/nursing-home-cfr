@@ -10,7 +10,7 @@ I start with the cases (blue) and deaths (orange) by week.  X-axis is the week n
 
 ![](orig.png)
 
-The goal is to predict the deaths as a function of cases.  Let’s look at a window of four weeks.  The number of deaths at the end of week 4 is a fraction the number of cases during week 4 (people who died in this week), plus some fraction of the number of cases in week 3 (people who took 2 weeks to die), plus some fraction of the number of cases in week 2 (people who took 3 weeks to die), plus some fraction of the number of cases in week 1 (people who took 4 weeks to die).
+The goal is to predict the deaths as a function of cases.  Let’s look at a window of four weeks.  The number of deaths at the end of week 4 is a fraction the number of cases during week 4 (people who died in this week), plus some fraction of the number of cases in week 3 (people who took between 1 and 2 weeks to die), plus some fraction of the number of cases in week 2 (people who took between 2 and 3 weeks to die), plus some fraction of the number of cases in week 1 (people who took between 3 and 4 weeks to die).
 
 More formally, our function is
 
@@ -22,7 +22,7 @@ We constrain our selection of $a_l$ be based on a survival function, $S$
 
 $$D_w=a\sum_{l=0}^LS_l \times C_{w-l}$$
 
-where $a$ is simply a scaling coefficient, and we find a survival function, $S_l$ that describes the fraction of people that are left after week $l$.
+where $a$ is simply a scaling coefficient, and we find a survival function, $S_l$ that describes the fraction of people that die in  week $l$.
 
 We look at two survival functions, and use the scipy defintions:
 
