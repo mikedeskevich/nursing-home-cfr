@@ -3,7 +3,7 @@ import scipy.optimize
 import scipy.stats
 import matplotlib.pyplot as plt
 
-#this code is just to make some plots for the markdown file, the real analysis is in cfrwindow.py
+# this code is just to make some plots for the markdown file, the real analysis is in cfrwindow.py
 
 # data copied from Steve's spreadsheet
 # just did this a parallel lists to make my life easy
@@ -54,18 +54,18 @@ wstop = wstart+window
 
 # fit the data to a log normal with lag
 (s, scale, a), pcov = scipy.optimize.curve_fit(lag_lognormal,
-                                                    cases[wstart:wstop],
-                                                    deaths[wstart:wstop],
-                                                        bounds=([0, 0, 0], [2, 200, .5]))
+                                               cases[wstart:wstop],
+                                               deaths[wstart:wstop],
+                                               bounds=([0, 0, 0], [2, 200, .5]))
 f = scipy.stats.lognorm(s, loc=0, scale=scale)
 
 print('log normal coefs')
-print('s',s)
+print('s', s)
 # print('loc',loc)
-print('scale',scale)
-print('a',a)
+print('scale', scale)
+print('a', a)
 for lag in range(lagmax):
-    print(lag,a*(f.cdf(lag+1)-f.cdf(lag)))
+    print(lag, a*(f.cdf(lag+1)-f.cdf(lag)))
 print('')
 
 x = np.linspace(0, lagmax, 100)
@@ -92,15 +92,15 @@ plt.savefig('lognormal-pred.png')
 
 # fit the data to a weibull with lag
 (scale, a), pcov = scipy.optimize.curve_fit(lag_weibull2,
-                                                 cases[wstart:wstop],
-                                                 deaths[wstart:wstop],
+                                            cases[wstart:wstop],
+                                            deaths[wstart:wstop],
                                             bounds=([0, 0], [3, .5]))
 f = scipy.stats.weibull_min(2, loc=0, scale=scale)
 
 print('weibull coefs')
-print('s',2)
+print('s', 2)
 # print('loc',loc)
-print('scale',scale)
+print('scale', scale)
 print('a', a)
 for lag in range(lagmax):
     print(lag, a*(f.cdf(lag+1)-f.cdf(lag)))

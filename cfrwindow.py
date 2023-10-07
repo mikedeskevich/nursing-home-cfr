@@ -3,7 +3,7 @@ import scipy.optimize
 import scipy.stats
 import matplotlib.pyplot as plt
 
-#this code implements the slinding window fits to the data
+# this code implements the slinding window fits to the data
 
 # data copied from Steve's spreadsheet
 # just did this a parallel lists to make my life easy
@@ -34,6 +34,7 @@ def lag_lognormal(x, s, scale, a):
     # apply the lag function above with the lognormal distribution
     return a*do_lag(x, scipy.stats.lognorm(s, loc=0, scale=scale))
 
+
 def lag_weibull2(x, scale, a):
     # apply the lag function with a weibull set to '2' which is the typical survival function
     return a*do_lag(x, scipy.stats.weibull_min(2, loc=0, scale=scale))
@@ -48,12 +49,12 @@ window = lagmax*3
 
 # let's loop over the data and accumulate the coefficients
 weekid = []
-al=[]
+al = []
 c0l = []
-aw=[]
+aw = []
 c0w = []
-p0l=None
-p0w=None
+p0l = None
+p0w = None
 for wstart in range(1, len(cases)-window):
     wstop = wstart+window
 
@@ -61,11 +62,11 @@ for wstart in range(1, len(cases)-window):
 
     # fit the data to a log normal with lag
     p0l, pcov = scipy.optimize.curve_fit(lag_lognormal,
-                                                        cases[wstart:wstop],
-                                                        deaths[wstart:wstop],
-                                                        # p0=p0l,
-                                                        bounds=([0, 0, 0], [2, 5, 1]))
-    (s, scale, a)=p0l
+                                         cases[wstart:wstop],
+                                         deaths[wstart:wstop],
+                                         # p0=p0l,
+                                         bounds=([0, 0, 0], [2, 5, 1]))
+    (s, scale, a) = p0l
     f = scipy.stats.lognorm(s, loc=0, scale=scale)
 
     # take the fit parameters and pull out the coefficients
@@ -78,11 +79,11 @@ for wstart in range(1, len(cases)-window):
 
     # fit the data to a weibull with lag
     p0w, pcov = scipy.optimize.curve_fit(lag_weibull2,
-                                                     cases[wstart:wstop],
-                                                     deaths[wstart:wstop],
-                                                    #  p0=p0w,
-                                                     bounds=([0, 0], [3, 1]))
-    (scale, a)=p0w
+                                         cases[wstart:wstop],
+                                         deaths[wstart:wstop],
+                                         #  p0=p0w,
+                                         bounds=([0, 0], [3, 1]))
+    (scale, a) = p0w
     f = scipy.stats.weibull_min(2, loc=0, scale=scale)
 
     # take the fit parameters and pull out the coefficients
@@ -127,3 +128,7 @@ plt.clf()
 # plt.show()
 plt.plot(np.array(aw)*np.array(c0w))
 plt.savefig('awc0w.png')
+
+with open('weibull-coef.csv', 'w') as f:
+    for i in range(len(weekid)):
+        print(weekid[i], ',', aw[i], ',', c0w[i], ',', aw[i]*c0w[i], file=f)
