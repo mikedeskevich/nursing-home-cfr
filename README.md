@@ -13,15 +13,15 @@ I start with the cases (blue) and deaths (orange) by week.  X-axis is the week n
 The goal is to predict the deaths as a function of cases.  Let’s look at a window of four weeks.  The number of deaths at the end of week 4 is a fraction the number of cases during week 4 (people who died in this week), plus some fraction of the number of cases in week 3 (people who took 2 weeks to die), plus some fraction of the number of cases in week 2 (people who took 3 weeks to die), plus some fraction of the number of cases in week 1 (people who took 4 weeks to die).
 
 More formally, our function is
-$$
-D_w=\sum_{l=0}^La_l \times C_{w-l}
-$$
+
+$D_w=\sum_{l=0}^La_l \times C_{w-l}$
+
 where $D_w$ is deaths in week, $w$, $a_l$ is the fraction of cases from $l$ weeks ago that died, and $C_w$ is the number of cases in week, $w$.
 
 We constrain our selection of $a_l$ be based on a survival function, $S$
-$$
-D_w=a\sum_{l=0}^LS_l \times C_{w-l}
-$$
+
+$D_w=a\sum_{l=0}^LS_l \times C_{w-l}$
+
 where $a$ is simply a scaling coefficient, and we find a survival function, $S_l$ that describes the fraction of people that are left after week $l$.
 
 We look at two survival functions, and use the scipy defintions:
@@ -35,9 +35,9 @@ For the lognormal, we do a non-linear least squares fit to find the shape and sc
 We define the survival function at lag $l$ to be the integral of the probability distribution function (PDF) between $l$ and $l+1$, which is can be interpreted at the number of people that died between the start and end of week, $l$.  In the code this is the difference of the cumulative distribution function (CDF) at $l+1$ and $l$.
 
 Given a PDF, $f(l)$, that returns the probability density of dying at week, $l$, we compute the survival function as 
-$$
-S_l=\int_l^{l+1}f(l)dl
-$$
+
+$S_l=\int_l^{l+1}f(l)dl$
+
 In the python code, we are minimizing the residuals of 
 
 ``` python
