@@ -32,7 +32,7 @@ Weibull, as `scipy.stats.weibull_min` (https://docs.scipy.org/doc/scipy/referenc
 
 For the lognormal, we do a non-linear least squares fit to find the shape and scale parameter that best fits the data.  For the Weibull, we fix the shape parameter at 2 since that’s the commonly accepted formula for a survival function.
 
-We define the survival function at lag $l$ to be the integral of the probability distribution function (PDF) between $l$ and $l+1$, which is can be interpreted at the number of people that died between the start and end of week, $l$.  In the code this is the difference of the cumulative distribution function (CDF) at $l+1$ and $l$.
+We define the survival function at lag $l$ to be the integral of the probability distribution function (PDF) between $l$ and $l+1$, which can be interpreted at the number of people that died between the start and end of week, $l$.  In the code this is the difference of the cumulative distribution function (CDF) at $l+1$ and $l$.
 
 Given a PDF, $f(l)$, that returns the probability density of dying at week, $l$, we compute the survival function as 
 
@@ -93,9 +93,11 @@ Weibull
 
 ![](weibull-pred.png)
 
-Since the Omicron surge changes the coefficients, it’s likely that the vaccine rollout should change the coefficients too.  If we had a safe and effective vaccine then we’d expect two things: 1) the overall CFR would go down, that is our $a$ parameter should get smaller after the vaccine and 2) it should take longer to die, that is $S_0$ should go down relative to $S_1$, $S_2$, $S_3$
+Since the Omicron surge changes the coefficients, it’s likely that the vaccine rollout should change the coefficients too.  If we have a safe and effective vaccine then we’d expect two things: 1) the overall CFR would go down, that is, our $a$ parameter should get smaller after the vaccine and 2) it should take longer to die, that is, $S_0$ should go down relative to $S_1$, $S_2$, $S_3$
 
-So, let’s take a sliding window of 12 weeks and redo the fit to that data, I include here only the Weibull distribution because it seems to be the most robust to the short data window.  That is we can compute $a$ and $S_l$ at week 12 based on weeks 1 through 12 case and death data, then again at week 13 based on weeks 2-13, and so on.
+So, let’s take a sliding window of 12 weeks and redo the fit to that data.  That is, we can compute $a$ and $S_l$ at week 12 based on weeks 1 through 12 case and death data, then again at week 13 based on weeks 2-13, and so on.
+
+I include here only the Weibull distribution because it seems to be the most robust to the short data window.
 
 Here’s $a$ as a function of week for the Weibull fit
 
