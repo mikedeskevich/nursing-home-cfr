@@ -14,13 +14,13 @@ The goal is to predict the deaths as a function of cases.  Let’s look at a win
 
 More formally, our function is
 
-$D_w=\sum_{l=0}^La_l \times C_{w-l}$
+$$D_w=\sum_{l=0}^L a_l \times C_{w-l}$$
 
 where $D_w$ is deaths in week, $w$, $a_l$ is the fraction of cases from $l$ weeks ago that died, and $C_w$ is the number of cases in week, $w$.
 
 We constrain our selection of $a_l$ be based on a survival function, $S$
 
-$D_w=a\sum_{l=0}^LS_l \times C_{w-l}$
+$$D_w=a\sum_{l=0}^LS_l \times C_{w-l}$$
 
 where $a$ is simply a scaling coefficient, and we find a survival function, $S_l$ that describes the fraction of people that are left after week $l$.
 
@@ -36,7 +36,7 @@ We define the survival function at lag $l$ to be the integral of the probability
 
 Given a PDF, $f(l)$, that returns the probability density of dying at week, $l$, we compute the survival function as 
 
-$S_l=\int_l^{l+1}f(l)dl$
+$$S_l=\int_l^{l+1}f(l)dl$$
 
 In the python code, we are minimizing the residuals of 
 
