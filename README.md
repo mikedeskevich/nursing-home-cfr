@@ -115,4 +115,4 @@ Keep in mind that the vaccine rollout is around week 32 and the first booster wa
 
 The $a$ coefficient (fraction of people dying) is very obvious at the original vaccine rollout, it skyrockets.  It’s less dramatic at the booster (probably because of the deadwood phenomenon).  But at the booster $S_0$ does go back up quickly, meaning that it’s pulling forward deaths.
 
-Omicron is around week 80 and that changes everything, basically people stop dying ($a$ goes way down), and those that do die are quite weak and died early ($S_0$ is large), probably because they’re immune system is messed up from the booster.
+Omicron is around week 80 and that changes everything, basically people stop dying ($a$ goes way down), and those that do die are quite weak and died early ($S_0$ is large), probably because their immune system is messed up from the booster.
