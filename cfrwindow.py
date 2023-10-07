@@ -130,5 +130,6 @@ plt.plot(np.array(aw)*np.array(c0w))
 plt.savefig('awc0w.png')
 
 with open('weibull-coef.csv', 'w') as f:
+    print('date, a, S0, a x S0', file=f)
     for i in range(len(weekid)):
         print(weekid[i], ',', aw[i], ',', c0w[i], ',', aw[i]*c0w[i], file=f)
