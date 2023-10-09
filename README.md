@@ -1,12 +1,14 @@
-WARNING: this is all first-draft code.  I need someone else to review it and make sure I’m thinking the right way.
+UPDATE: I didn't know Steve was going to post this publicaly.  I'm glad he did, but the quality of the writing below was more for internal discussion between me and Steve.  The plots are ugly and unlabelled.  If I get some time soon, I'll make it more suitable for a general audience.
 
-Also, please don’t judge me on the quality of this code.  I wrote it on the couch with kids screaming at me, it doesn’t reflect the quality of my normal professional code. It’s a hack to get a result.
+WARNING: This is all first-draft code.  I need someone else to review it and make sure I’m thinking the right way.
+
+Also, please don’t judge me on the quality of this code.  I wrote it on the couch with kids screaming at me, it doesn’t reflect the quality of my normal professional code. It’s prety hackt to see if there was a signal.
 
 Please double check that all of my indices match up nicely.  With windows and lags and all of that, I can have easily messed up some bookeeping. 
 
 I welcome all PRs or comments.  
 
-I start with the cases (blue) and deaths (orange) by week.  X-axis is the week number since the start of the epoch (5/24/2020)  This data comes from Steve (https://github.com/skirsch/R-projects/tree/main/nursing)
+I start with the cases (blue) and deaths (orange) by week.  X-axis is the week number since the start of the epoch (5/24/2020)  This data comes from Steve (https://github.com/skirsch/R-projects/tree/main/nursing) (weeks are offset by 12 since we have to do the first fit on the 1-12 data.)  I'll make prettier plots later with proper axes and labels.
 
 ![](orig.png)
 
